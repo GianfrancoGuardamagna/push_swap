@@ -1,31 +1,6 @@
-#include "push_swap.h"
+#include "../push_swap.h"
 
-int cost_to_stack(t_stack *stack, int target_value)
-{
-    int pos;
-    int len;
-    int threshold;
-    t_stack *current;
-
-    pos = 0;
-    len = stack_len(stack);
-    threshold = stack_len(stack) / 2;
-    current = stack;
-    while (current)
-    {
-        if(current->value == target_value)
-        {
-            if(pos <= threshold)
-                return(pos);
-            else if(pos > threshold)
-                return((len - pos) * -1);
-        }
-        pos++;
-        current = current->next;
-    }
-    return (-1);
-}
-
+//How much it cost to put the value on the first position
 int cost_in_stack(t_stack *stack, int value)
 {
     int pos;
@@ -52,11 +27,12 @@ int cost_in_stack(t_stack *stack, int value)
     return (-1);
 }
 
+//It has to find the less bigger value to fit the value_in_b on top of that, if there isnt it should point to the minimum value
 int find_target(t_stack *stack_a, int value_in_b)
 {
     t_stack *current = stack_a;
-    int target_value = INT_MAX;
-    int min_value = INT_MAX;
+    int target_value = 2147483647;
+    int min_value = 2147483647;
     
     while (current)
     {
@@ -67,12 +43,13 @@ int find_target(t_stack *stack_a, int value_in_b)
         current = current->next;
     }
     
-    if (target_value == INT_MAX)
+    if (target_value == 2147483647)
         target_value = min_value;
     
     return target_value;
 }
 
+//Calculate the cost of moving value in stack B to stack A by putting both, value on B and target value on top of both stacks to push.
 int calculate_cost(t_stack *stack_a, t_stack *stack_b, int value_in_b)
 {
     int cost_a;
@@ -80,7 +57,7 @@ int calculate_cost(t_stack *stack_a, t_stack *stack_b, int value_in_b)
     int target_value;
 
     target_value = find_target(stack_a, value_in_b);
-    cost_a = cost_to_stack(stack_a, target_value);
+    cost_a = cost_in_stack(stack_a, target_value);
     cost_b = cost_in_stack(stack_b, value_in_b);
     if((cost_a > 0 && cost_b > 0) || (cost_a < 0 && cost_b < 0))
     {

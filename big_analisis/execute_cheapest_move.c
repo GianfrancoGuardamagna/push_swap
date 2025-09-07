@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void set_stack_a(t_stack **stack, int cheapest)
 {
@@ -63,7 +63,7 @@ void set_stacks(t_stack **stack_a, t_stack **stack_b, int cheapest)
         while ((*stack_a)->value != target && (*stack_b)->value != cheapest)
             rr(stack_a, stack_b);
     }
-    else if((cost_to_stack(*stack_b, cheapest) < 0) && (cost_in_stack(*stack_a, target) < 0))
+    else if((cost_in_stack(*stack_b, cheapest) < 0) && (cost_in_stack(*stack_a, target) < 0))
     {
         while ((*stack_a)->value != target && (*stack_b)->value != cheapest)
             rrr(stack_a, stack_b);

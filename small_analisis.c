@@ -29,6 +29,9 @@ static int position_biggest(t_stack **stack)
 void small_analisis(t_stack **stack)
 {
     int position;
+
+    if(stack_sorted(*stack))
+        return;
     position = position_biggest(stack);
     if(position == 0)
     {

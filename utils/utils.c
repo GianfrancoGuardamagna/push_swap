@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "../push_swap.h"
 
 t_stack *ft_lstnew(int content)
 {
@@ -23,7 +23,9 @@ void ft_lstadd_back(t_stack **stack, t_stack *new_node)
     }
     current = *stack;
     while (current->next)
+    {
         current = current->next;
+    }
     current->next = new_node;
 }
 
@@ -46,7 +48,7 @@ int stack_len(t_stack *stack)
     {
         stack = stack->next;
         i++;
-    }    
+    }
     return i;
 }
 
